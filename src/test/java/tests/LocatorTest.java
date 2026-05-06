@@ -1,27 +1,16 @@
+package tests;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.HashMap;
 
-public class LocatorTest {
+public class LocatorTest extends BaseTest {
 
     @Test
     public void checkLocator() {
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("credentials_enable_service", false);
-        chromePrefs.put("profile.password_manager_enabled", false);
-        options.setExperimentalOption("prefs", chromePrefs);
-        options.addArguments("--incognito");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
-        WebDriver driver = new ChromeDriver(options);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.cssSelector("#login-button"));
@@ -57,6 +46,5 @@ public class LocatorTest {
         driver.findElement(By.xpath("//input[@id='first-name']//ancestor::div[@class='checkout_info']"));
         driver.findElement(By.xpath("//input[@id='postal-code']//preceding::input[@id='last-name']"));
         driver.findElement(By.xpath("//input[@id='first-name']//following::input[@id='last-name']"));
-        driver.quit();
     }
 }
