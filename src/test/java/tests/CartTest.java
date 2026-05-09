@@ -11,7 +11,10 @@ import static org.testng.AssertJUnit.*;
 
 public class CartTest extends BaseTest {
 
-    @Test
+    @Test (priority = 1,
+            description = "Проверка добавления товара в корзину",
+            testName = "Проверка добавления товара в корзину",
+            groups = {"smoke"})
     public void addToCart() {
 
         loginPage.open();
@@ -21,7 +24,10 @@ public class CartTest extends BaseTest {
         cartPage.open();
         assertTrue(cartPage.findToCart( "Sauce Labs Backpack"));
     }
-    @Test
+    @Test (priority = 2,
+            description = "Проверка удаления товара из корзины",
+            testName = "Проверка удаления товара из корзины",
+            groups = {"smoke"})
     public void deleteToCart() {
 
             loginPage.open();
