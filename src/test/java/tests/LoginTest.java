@@ -1,13 +1,8 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-
-import java.time.Duration;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -17,6 +12,16 @@ public class LoginTest extends BaseTest {
             description = "Проверка авторизации с валидными кредами",
             testName = "Проверка авторизации с валидными кредами",
             groups = {"smoke"})
+    @Description("Проверка авторизации с валидными кредами")
+    @Epic("E2E")
+    @Feature("Login in to SauceDemo")
+    @Story("Positive Login")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com")
+    @TmsLink("SD-01")
+    @Issue("SD-01")
+    @Flaky
+    @Owner("Kesaeva Valeriya")
     public void checkLoginWithPositiveCred() {
         loginPage.open();
         loginPage.isPageOpen();
@@ -37,6 +42,15 @@ public class LoginTest extends BaseTest {
             description = "Проверка авторизации с НЕвалидными кредами",
             testName = "Проверка авторизации с НЕвалидными кредами",
             groups = {"regression"})
+    @Description("Проверка авторизации с НЕвалидными кредами")
+    @Epic("E2E")
+    @Feature("Login in to SauceDemo")
+    @Story("Negative Login")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com")
+    @TmsLink("SD-02")
+    @Issue("SD-02")
+    @Owner("Kesaeva Valeriya")
     public void negativeLogin(String username, String password, String errorMessage) {
         loginPage.open();
         loginPage.login(username, password);

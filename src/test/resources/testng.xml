@@ -5,8 +5,8 @@
        parallel="tests">
 
     <listeners>
-        <listener class-name="listeners.TestListener"/>
-        <listener class-name="listeners.RetryTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
+        <listener class-name="utils.listeners.RetryTransformer"/>
     </listeners>
 
     <test name="Thread 1">

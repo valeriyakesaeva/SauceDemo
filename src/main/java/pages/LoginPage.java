@@ -1,8 +1,8 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,6 +21,7 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие страницы авторизации")
     public void open() {
         driver.get(BASE_URL);
     }
@@ -29,6 +30,7 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
     }
 
+    @Step("Вход в магазин с именем пользователя: '{user}' и паролем: '{password}'")
     public void login(String username, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(username);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);

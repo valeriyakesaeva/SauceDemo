@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -15,6 +16,15 @@ public class CartTest extends BaseTest {
             description = "Проверка добавления товара в корзину",
             testName = "Проверка добавления товара в корзину",
             groups = {"smoke"})
+    @Description("Проверка добавления товара в корзину")
+    @Epic("E2E")
+    @Feature("Carts in SauceDemo")
+    @Story("Carts")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com")
+    @TmsLink("SD-04")
+    @Issue("SD-04")
+    @Owner("Kesaeva Valeriya")
     public void addToCart() {
 
         loginPage.open();
@@ -24,10 +34,20 @@ public class CartTest extends BaseTest {
         cartPage.open();
         assertTrue(cartPage.findToCart( "Sauce Labs Backpack"));
     }
+
     @Test (priority = 2,
             description = "Проверка удаления товара из корзины",
             testName = "Проверка удаления товара из корзины",
             groups = {"smoke"})
+    @Description("Проверка удаления товара из корзины")
+    @Epic("E2E")
+    @Feature("Carts in SauceDemo")
+    @Story("Carts")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://www.saucedemo.com")
+    @TmsLink("SD-05")
+    @Issue("SD-05")
+    @Owner("Kesaeva Valeriya")
     public void deleteToCart() {
 
             loginPage.open();
