@@ -1,42 +1,58 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.testng.AllureTestNg;
+import org.testng.ITestContext;
+import utils.listeners.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.*;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 
 import java.util.HashMap;
 
+@Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
 
-    WebDriver driver;
-    LoginPage loginPage;
-    ProductsPage productsPage;
-    CartPage cartPage;
+    protected WebDriver driver;
+    protected LoginPage loginPage;
+    protected ProductsPage productsPage;
+    protected CartPage cartPage;
 
-    @BeforeMethod
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("credentials_enable_service", false);
-        chromePrefs.put("profile.password_manager_enabled", false);
-        options.setExperimentalOption("prefs", chromePrefs);
-        options.addArguments("--incognito");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
-        driver = new ChromeDriver(options);
+    @Parameters({"browser"})
+    @BeforeMethod(alwaysRun = true, description = "Настройка браузера")
+    @Description("Настройка браузера")
+    public void setUp(@Optional("chrome") String browser, ITestContext iTestContext) {
+        if (browser.equalsIgnoreCase("chrome")) {
+            ChromeOptions options = new ChromeOptions();
+            HashMap<String, Object> chromePrefs = new HashMap<>();
+            chromePrefs.put("credentials_enable_service", false);
+            chromePrefs.put("profile.password_manager_enabled", false);
+            options.setExperimentalOption("prefs", chromePrefs);
+            options.addArguments("--incognito");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--disable-infobars");
+            driver = new ChromeDriver(options);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            driver = new FirefoxDriver();
+            driver.manage().window().maximize();
+        }
+
+        iTestContext.setAttribute("driver", driver);
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
     }
-    @AfterMethod (alwaysRun = true)
+
+    @AfterMethod (alwaysRun = true, description = "Настройка браузера")
+    @Description("Закрытие браузера")
     public void tearDown() {
         driver.quit();
+        }
     }
-}

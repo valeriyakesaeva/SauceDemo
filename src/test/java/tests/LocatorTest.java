@@ -8,7 +8,9 @@ import java.time.Duration;
 
 public class LocatorTest extends BaseTest {
 
-    @Test
+    @Test (priority = 1,
+            description = "Поиск локаторов по типу",
+            testName = "Поиск локаторов по типу")
     public void checkLocator() {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
