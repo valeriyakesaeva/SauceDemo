@@ -27,11 +27,13 @@ public class CartTest extends BaseTest {
     @Owner("Kesaeva Valeriya")
     public void addToCart() {
 
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        assertEquals(productsPage.getTitle(),"Products");
-        productsPage.addToCart("Sauce Labs Backpack");
-        cartPage.open();
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce");
+        productsPage.isPageOpened()
+                .addToCart("Sauce Labs Backpack");
+        cartPage.open()
+                .isPageOpened();
         assertTrue(cartPage.findToCart( "Sauce Labs Backpack"));
     }
 
@@ -50,10 +52,12 @@ public class CartTest extends BaseTest {
     @Owner("Kesaeva Valeriya")
     public void deleteToCart() {
 
-            loginPage.open();
-            loginPage.login("standard_user", "secret_sauce");
+            loginPage.open()
+                    .isPageOpened()
+                    .login("standard_user", "secret_sauce");
             assertEquals(productsPage.getTitle(),"Products");
-            productsPage.addToCart("Sauce Labs Backpack");
+            productsPage.isPageOpened()
+                    .addToCart("Sauce Labs Backpack");
             cartPage.open();
             assertTrue(cartPage.findToCart( "Sauce Labs Backpack"));
             cartPage.deleteToCart("Sauce Labs Backpack");

@@ -21,20 +21,25 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Override
     @Step("Открытие страницы авторизации")
-    public void open() {
+    public LoginPage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
-    public void isPageOpen() {
+    @Override
+    public LoginPage isPageOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        return this;
     }
 
     @Step("Вход в магазин с именем пользователя: '{user}' и паролем: '{password}'")
-    public void login(String username, String password) {
+    public ProductsPage login(String username, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(username);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     public String getErrorMessage() {
