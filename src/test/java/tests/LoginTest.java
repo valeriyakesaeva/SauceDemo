@@ -23,9 +23,10 @@ public class LoginTest extends BaseTest {
     @Flaky
     @Owner("Kesaeva Valeriya")
     public void checkLoginWithPositiveCred() {
-        loginPage.open();
-        loginPage.isPageOpen();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce");
+        productsPage.isPageOpened();
         assertEquals(productsPage.getTitle(),"Products");
     }
 
@@ -52,8 +53,8 @@ public class LoginTest extends BaseTest {
     @Issue("SD-02")
     @Owner("Kesaeva Valeriya")
     public void negativeLogin(String username, String password, String errorMessage) {
-        loginPage.open();
-        loginPage.login(username, password);
+        loginPage.open()
+                .login(username, password);
         assertEquals(loginPage.getErrorMessage(), errorMessage);
     }
 }

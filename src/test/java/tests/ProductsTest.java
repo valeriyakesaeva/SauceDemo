@@ -21,8 +21,10 @@ public class ProductsTest extends BaseTest {
     @Issue("SD-03")
     @Owner("Kesaeva Valeriya")
     public void findProducts() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.open()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce");
+        productsPage.isPageOpened();
         assertEquals(productsPage.getTitle(),"Products");
         assertEquals(productsPage.getProductsCount(), 6, "На странице должно быть 6 товаров");
     }
